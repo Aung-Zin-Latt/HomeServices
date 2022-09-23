@@ -41,6 +41,9 @@
                                 </div>
                             </div>
                             <div class="panel-body">
+                                @if (Session::has('message'))
+                                    <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+                                @endif
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
@@ -48,6 +51,7 @@
                                             <th>Image</th>
                                             <th>Name</th>
                                             <th>Slug</th>
+                                            <th colspan="2">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -57,6 +61,10 @@
                                                 <td><img src="{{ asset('images/categories') }}/{{ $scategory->image }}" width="60" alt="{{ $scategory->name }}"></td>
                                                 <td>{{ $scategory->name }}</td>
                                                 <td>{{ $scategory->slug }}</td>
+                                                <td>
+                                                    <a href="{{ route('admin.edit_service_category', ['category_id'=>$scategory->id]) }}"><i class="fa fa-edit fa-2x text-info"></i></a>
+                                                    <a href="javascript:void(0)" wire:click="deleteServiceCategory({{ $scategory->id }})" style="margin-left: 10px;"><i class="fa fa-times fa-2x text-danger"></i></a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -70,3 +78,15 @@
         </div>
     </section>
 </div>
+
+{{-- @push('scripts')
+    <script>
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    </script>
+@endpush --}}

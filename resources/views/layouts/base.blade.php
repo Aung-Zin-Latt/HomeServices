@@ -270,6 +270,7 @@
             </div>
         </footer>
     </div>
+
     <script type="text/javascript" src="{{ asset('assets/js/nav/jquery.sticky.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/totop/jquery.ui.totop.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/accordion/accordion.js') }}"></script>
@@ -293,6 +294,25 @@
     <script type="text/javascript" src="{{ asset('assets/js/validation-rule.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/bootstrap3-typeahead.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(() => {
+            toastr.options = {
+                "progressBar": true,
+                "positionClass": "toast-top-right"
+            }
+        });
+        window.addEventListener('success', event => {
+            toastr.success(event.detail.message);
+        });
+        window.addEventListener('warning', event => {
+            toastr.warning(event.detail.message);
+        });
+        window.addEventListener('error', event => {
+            toastr.error(event.detail.message);
+        });
+    </script>
     <script type="text/javascript">
         jQuery(document).ready(function () {
             jQuery('.tp-banner').show().revolution({
@@ -307,6 +327,34 @@
             });
         });
     </script>
+
+    {{-- Sweet Alert Delete --}}
+    <script>
+        window.addEventListener('show-delete-confirmation', event => {
+            Swal.fire({
+                title: 'Are you sure?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#28a4c9',
+                cancelButtonColor: '#a94442',
+                confirmButtonText: 'Yes, Delete'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emit('deleteConfirmed')
+                }
+            });
+        });
+
+        // window.addEventListener('categoryDeleted', event => {
+        //     Swal.fire({
+        //         'Deleted',
+        //         'Category has been deleted!',
+        //         'success'
+        //     });
+        // });
+
+    </script>
+
 
     @livewireScripts
 </body>

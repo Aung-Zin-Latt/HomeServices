@@ -26,7 +26,7 @@ class AdminAddServiceCategoryComponent extends Component
         $this->validateOnly($fields, [
             'name' => 'required',
             'slug' => 'required',
-            'image' => 'required|mimes:jpeg,png'
+            'image' => 'required|mimes:jpeg,jpg,png'
         ]);
     }
 
@@ -35,7 +35,7 @@ class AdminAddServiceCategoryComponent extends Component
         $this->validate([
             'name' => 'required',
             'slug' => 'required',
-            'image' => 'required|mimes:jpeg,png'
+            'image' => 'required|mimes:jpeg,jpg,png'
         ]);
 
         $scategory = new ServiceCategory();
@@ -53,4 +53,5 @@ class AdminAddServiceCategoryComponent extends Component
     {
         return view('livewire.admin.admin-add-service-category-component')->layout('layouts.base');
     }
+
 }
